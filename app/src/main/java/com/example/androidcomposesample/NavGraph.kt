@@ -23,7 +23,7 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
             Playground(actionToList = actions.toListPage)
         }
         composable(MainDestinations.LIST_PAGE_ROUTE) {
-            ListPage()
+            BasicsPage()
         }
     }
 }
