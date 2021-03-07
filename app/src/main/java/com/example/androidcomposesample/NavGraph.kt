@@ -11,7 +11,6 @@ import androidx.navigation.compose.rememberNavController
 object MainDestinations {
     const val PLAYGROUND_ROUTE = "playground"
     const val LIST_PAGE_ROUTE = "listPage"
-    const val COURSE_DETAIL_ROUTE = "course"
 }
 
 @Composable
@@ -32,11 +31,5 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
 class MainActions(navController: NavHostController) {
     val toListPage: () -> Unit = {
         navController.navigate(MainDestinations.LIST_PAGE_ROUTE)
-    }
-    val selectCourse: (Long) -> Unit = { courseId: Long ->
-        navController.navigate("${MainDestinations.COURSE_DETAIL_ROUTE}/$courseId")
-    }
-    val upPress: () -> Unit = {
-        navController.navigateUp()
     }
 }
