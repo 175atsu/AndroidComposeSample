@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidComposeSample</string>
+    <string name="playground">PlayGround</string>
+    <string name="basics_page">BasicsPage</string>
 </resources>
