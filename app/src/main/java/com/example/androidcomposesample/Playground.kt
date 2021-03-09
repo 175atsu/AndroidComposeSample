@@ -41,7 +41,7 @@ fun Playground(
                 modifier = Modifier.padding(8.dp)
             ) {
                 Text(
-                    stringResource(R.string.basics_page),
+                    stringResource(R.string.list_page),
                     style = typography.body1,
                     color = Color.White
                 )

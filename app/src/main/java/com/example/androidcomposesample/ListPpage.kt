@@ -1,5 +1,8 @@
 package com.example.androidcomposesample
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -36,7 +39,16 @@ fun ListPage() {
 fun ListItem(names: List<String>, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         items(items = names) { name ->
-            Text(text = "Hello $name!", modifier = modifier.padding(24.dp))
+            var isSelected = remember { mutableStateOf(false) }
+            val backgroundColor =
+                animateColorAsState(targetValue = if (isSelected.value) Color.Red else Color.Transparent)
+            Text(
+                text = "Hello $name!",
+                modifier = modifier
+                    .padding(24.dp)
+                    .background(color = backgroundColor.value)
+                    .clickable { isSelected.value = !isSelected.value }
+            )
             Divider(color = Color.Black)
         }
     }
