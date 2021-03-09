@@ -83,7 +83,7 @@ fun Counter2(count: Int, updateCount: (Int) -> Unit) {
         onClick = { updateCount(count + 1) },
         colors = ButtonDefaults.buttonColors(backgroundColor = if (count > 5) Color.Green else Color.White)
     ) {
-        Text("I've been clicked $count times")
+        Text("I have been clicked $count times")
     }
 }
 
