@@ -3,54 +3,117 @@ package com.example.androidcomposesample
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.chrisbanes.accompanist.coil.CoilImage
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListPage() {
-    val names = List(100) { "Hello Android #$it" }
+    val listSize = 100
+    val names = List(listSize) { "Hello Android #$it !" }
     val countState = remember { mutableStateOf(0) }
+    val scrollState = rememberLazyListState()
+
     Surface(
         color = Color.Yellow
     ) {
         Column(
             modifier = Modifier.fillMaxHeight()
         ) {
-            ListItem(names, Modifier.weight(1f))
+            ControlButton(scrollState, listSize)
+            ListItem(scrollState, names, Modifier.weight(1f))
             Counter2(count = countState.value, updateCount = { count -> countState.value = count })
         }
     }
 }
 
 @Composable
-fun ListItem(names: List<String>, modifier: Modifier = Modifier) {
-    LazyColumn(modifier = modifier) {
+fun ListItem(scrollState: LazyListState, names: List<String>, modifier: Modifier = Modifier) {
+    LazyColumn(
+        modifier = modifier,
+        state = scrollState
+    ) {
         items(items = names) { name ->
-            var isSelected = remember { mutableStateOf(false) }
+            val isSelected = remember { mutableStateOf(false) }
             val backgroundColor =
                 animateColorAsState(targetValue = if (isSelected.value) Color.Red else Color.Transparent)
-            Text(
-                text = "Hello $name!",
-                modifier = modifier
-                    .padding(24.dp)
-                    .background(color = backgroundColor.value)
-                    .clickable { isSelected.value = !isSelected.value }
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CoilImage(
+                    data = "https://developer.android.com/images/brand/Android_Robot.png",
+                    contentDescription = "Android Logo",
+                    modifier = Modifier.size(50.dp)
+                )
+                Text(
+                    text = name,
+                    modifier = modifier
+                        .padding(24.dp)
+                        .background(color = backgroundColor.value)
+                        .clickable { isSelected.value = !isSelected.value }
+                )
+            }
             Divider(color = Color.Black)
         }
+    }
+}
+
+@Composable
+fun ControlButton(scrollState: LazyListState, listSize: Int) {
+    val coroutineScope = rememberCoroutineScope()
+    Row(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        ScrollButton(
+            Modifier.weight(1f),
+            ButtonDefaults.buttonColors(Color.White),
+            "Scroll to the top"
+        ) {
+            coroutineScope.launch {
+                scrollState.animateScrollToItem(0)
+            }
+        }
+        ScrollButton(
+            Modifier.weight(1f),
+            ButtonDefaults.buttonColors(Color.Red),
+            "Scroll to the end"
+        ) {
+            coroutineScope.launch {
+                scrollState.animateScrollToItem(listSize - 1)
+            }
+        }
+    }
+}
+
+@Composable
+fun ScrollButton(
+    modifier: Modifier = Modifier,
+    color: ButtonColors,
+    label: String,
+    click: () -> Unit
+) {
+    Button(
+        onClick = click,
+        modifier = modifier.padding(8.dp),
+        colors = color,
+    ) {
+        Text(
+            text = label,
+            style = typography.subtitle1,
+        )
     }
 }
 
