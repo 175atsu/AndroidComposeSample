@@ -3,4 +3,5 @@
     <string name="playground">PlayGround</string>
     <string name="basics_page">BasicsPage</string>
     <string name="list_page">ListPage</string>
+    <string name="grid_page">GridPage</string>
 </resources>
