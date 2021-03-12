@@ -11,7 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Playground(actionToList: () -> Unit) {
+fun Playground(
+    actionToBasics: () -> Unit,
+    actionToList: () -> Unit,
+    actionToGrid: () -> Unit
+) {
     val typography = MaterialTheme.typography
     MaterialTheme {
         Column {
@@ -21,7 +25,7 @@ fun Playground(actionToList: () -> Unit) {
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
             TextButton(
-                onClick = actionToList,
+                onClick = actionToBasics,
                 colors = ButtonDefaults.buttonColors(Color.DarkGray),
                 modifier = Modifier.padding(8.dp),
                 elevation = ButtonDefaults.elevation()
@@ -38,7 +42,18 @@ fun Playground(actionToList: () -> Unit) {
                 modifier = Modifier.padding(8.dp)
             ) {
                 Text(
-                    stringResource(R.string.basics_page),
+                    stringResource(R.string.list_page),
+                    style = typography.body1,
+                    color = Color.White
+                )
+            }
+            Button(
+                onClick = actionToGrid,
+                colors = ButtonDefaults.buttonColors(Color.DarkGray),
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(
+                    stringResource(R.string.grid_page),
                     style = typography.body1,
                     color = Color.White
                 )
@@ -50,5 +65,9 @@ fun Playground(actionToList: () -> Unit) {
 @Preview(name = "Playground")
 @Composable
 private fun PlaygroundPreview() {
-    Playground(actionToList = { })
+    Playground(
+        actionToBasics = { },
+        actionToList = { },
+        actionToGrid = { }
+    )
 }
