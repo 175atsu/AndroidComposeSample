@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
 fun BasicsPage() {
@@ -87,8 +88,42 @@ fun Counter2(count: Int, updateCount: (Int) -> Unit) {
     }
 }
 
+@Composable
+fun ConstraintLayoutContent() {
+    ConstraintLayout {
+        val (button1, button2, text) = createRefs()
+        Button(
+            onClick = { /* Do something */ },
+            modifier = Modifier.constrainAs(button1) {
+                top.linkTo(parent.top, margin = 16.dp)
+            }
+        ) {
+            Text("Button1")
+        }
+        val barrier = createEndBarrier(button1, text)
+        Button(
+            onClick = { /* Do something */ },
+            modifier = Modifier.constrainAs(button2) {
+                top.linkTo(parent.top, margin = 16.dp)
+                start.linkTo(barrier)            }
+        ) {
+            Text("Button2")
+        }
+        Text("Text", Modifier.constrainAs(text) {
+            top.linkTo(button1.bottom, margin = 16.dp)
+            centerHorizontallyTo(parent)
+        })
+    }
+}
+
 @Preview("ComposeBasics")
 @Composable
 fun PreviewBasicsPage() {
     BasicsPage()
+}
+
+@Preview("constraintLayout")
+@Composable
+fun PreviewConstraintLayout() {
+    ConstraintLayoutContent()
 }
