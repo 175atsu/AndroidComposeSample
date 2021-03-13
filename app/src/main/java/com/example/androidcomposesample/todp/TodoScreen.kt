@@ -72,11 +72,14 @@ fun TodoItemInput(
         }
     }
     Column {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+        ) {
             TodoInputText(text = text, onTextChange = onTextChange)
             TodoEditButton(onClick = submit, enabled = text.isNotBlank())
         }
-        if (iconsVisible) {
+        if (text.isNotBlank()) {
             AnimatedIconRow(
                 icon = icon,
                 onIconChange = onIconChange,
