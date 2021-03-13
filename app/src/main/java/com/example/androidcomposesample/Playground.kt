@@ -14,7 +14,8 @@ import androidx.compose.ui.unit.dp
 fun Playground(
     actionToBasics: () -> Unit,
     actionToList: () -> Unit,
-    actionToGrid: () -> Unit
+    actionToGrid: () -> Unit,
+    actionToTodo: () -> Unit
 ) {
     val typography = MaterialTheme.typography
     MaterialTheme {
@@ -58,6 +59,17 @@ fun Playground(
                     color = Color.White
                 )
             }
+            Button(
+                onClick = actionToTodo,
+                colors = ButtonDefaults.buttonColors(Color.DarkGray),
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(
+                    stringResource(R.string.todo_page),
+                    style = typography.body1,
+                    color = Color.White
+                )
+            }
         }
     }
 }
@@ -68,6 +80,7 @@ private fun PlaygroundPreview() {
     Playground(
         actionToBasics = { },
         actionToList = { },
-        actionToGrid = { }
+        actionToGrid = { },
+        actionToTodo = { }
     )
 }
