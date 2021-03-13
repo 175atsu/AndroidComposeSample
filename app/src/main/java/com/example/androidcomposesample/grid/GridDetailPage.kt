@@ -16,5 +16,4 @@ fun GridDetailPage(args: Bundle?) {
 @Preview("gridDetailPage")
 @Composable
 fun PreviewGridDetail() {
-//    GridDetailPage()
 }
