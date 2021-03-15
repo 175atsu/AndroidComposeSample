@@ -15,6 +15,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -164,8 +165,26 @@ private fun SelectableIconButton(
     }
 }
 
+@Composable
+fun TodoRow(
+    todo: TodoItem
+) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        Text(todo.task)
+        Icon(
+            imageVector = todo.icon.imageVector,
+            contentDescription = stringResource(id = todo.icon.contentDescription)
+        )
+    }
+}
+
 @Preview
 @Composable
-fun PreviewTest() {
+fun PreviewIconRow() {
     IconRow(icon = TodoIcon.Square, onIconChange = {})
 }

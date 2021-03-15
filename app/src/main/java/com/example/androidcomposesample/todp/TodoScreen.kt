@@ -1,6 +1,8 @@
 package com.example.androidcomposesample.todp
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -19,19 +21,21 @@ import com.example.androidcomposesample.R
 
 @Composable
 fun TodoScreen() {
+    val viewModel = TodoViewModel()
     ConstraintLayout(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
     ) {
-        val (topLabel, randomButton) = createRefs()
-        val enableTopSection = true
+        val (topLabel, todoItem, randomButton) = createRefs()
+        val enableTopSection = false
         TodoItemInputBackground(
             elevate = enableTopSection,
             modifier = Modifier
                 .fillMaxWidth()
                 .constrainAs(topLabel) {
                     top.linkTo(parent.top)
+                    bottom.linkTo(todoItem.top)
                 }) {
             if (enableTopSection) {
                 TodoItemInput({}, false)
@@ -39,12 +43,27 @@ fun TodoScreen() {
                 Text(
                     text = "Editing item",
                     style = MaterialTheme.typography.h6,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
                 )
             }
         }
+        LazyColumn(
+            contentPadding = PaddingValues(top = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .constrainAs(todoItem) {
+                    top.linkTo(topLabel.bottom)
+                }
+        ) {
+            items(items = viewModel.todoItems) { todo ->
+                TodoRow(todo)
+            }
+        }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { viewModel.addItem(generateRandomTodoItem()) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
@@ -89,6 +108,12 @@ fun TodoItemInput(
             Spacer(Modifier.height(16.dp))
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewScreen() {
+    TodoScreen()
 }
 
 @Preview
