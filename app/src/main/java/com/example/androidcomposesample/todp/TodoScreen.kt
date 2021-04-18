@@ -24,18 +24,19 @@ fun TodoScreen() {
     val viewModel = TodoViewModel()
     ConstraintLayout(
         modifier = Modifier
-            .fillMaxHeight()
             .fillMaxWidth()
+            .fillMaxHeight()
     ) {
         val (topLabel, todoItem, randomButton) = createRefs()
-        val enableTopSection = false
+        val enableTopSection = true
         TodoItemInputBackground(
             elevate = enableTopSection,
             modifier = Modifier
                 .fillMaxWidth()
                 .constrainAs(topLabel) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(todoItem.top)
+                    top.linkTo(parent.top,44.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
                 }) {
             if (enableTopSection) {
                 TodoItemInput({}, false)
