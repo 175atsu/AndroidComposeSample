@@ -1,4 +1,4 @@
-package com.example.androidcomposesample.todp
+package com.example.androidcomposesample.todo
 
 fun generateRandomTodoItem(): TodoItem {
     val message = listOf(

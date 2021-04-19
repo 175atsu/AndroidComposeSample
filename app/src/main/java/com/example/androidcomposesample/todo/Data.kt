@@ -1,4 +1,4 @@
-package com.example.androidcomposesample.todp
+package com.example.androidcomposesample.todo
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons

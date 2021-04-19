@@ -1,4 +1,4 @@
-package com.example.androidcomposesample.todp
+package com.example.androidcomposesample.todo
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.*
@@ -15,7 +15,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color

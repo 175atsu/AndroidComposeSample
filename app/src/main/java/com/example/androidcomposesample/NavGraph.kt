@@ -8,7 +8,7 @@ import androidx.navigation.compose.*
 import com.example.androidcomposesample.MainDestinations.INDEX_LABEL_KEY
 import com.example.androidcomposesample.grid.GridDetailPage
 import com.example.androidcomposesample.grid.GridPage
-import com.example.androidcomposesample.todp.TodoScreen
+import com.example.androidcomposesample.todo.TodoScreen
 
 object MainDestinations {
     const val PLAYGROUND_ROUTE = "playground"

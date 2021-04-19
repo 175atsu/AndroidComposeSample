@@ -1,4 +1,4 @@
-package com.example.androidcomposesample.todp
+package com.example.androidcomposesample.todo
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

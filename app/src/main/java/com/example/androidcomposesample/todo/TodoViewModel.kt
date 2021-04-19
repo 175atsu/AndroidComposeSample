@@ -1,4 +1,4 @@
-package com.example.androidcomposesample.todp
+package com.example.androidcomposesample.todo
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

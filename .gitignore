@@ -113,6 +113,7 @@ lint/tmp/
 .idea/uiDesigner.xml
 .idea/jarRepositories.xml
 .idea/deploymentTargetDropDown.xml
+.idea/kotlinScripting.xml
 
 .idea/inspectionProfiles/
 
