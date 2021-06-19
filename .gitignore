@@ -116,10 +116,8 @@ lint/tmp/
 .idea/runConfigurations.xml
 
 .idea/inspectionProfiles/
-
 .idea/dictionaries/s11306.xml
+.idea/kotlinScripting.xml
 
 # Google Services (e.g. APIs or Firebase)
 */google-services.json
-
-
