@@ -1,9 +1,5 @@
 package com.example.androidcomposesample.buildsrc
 
-object Versions {
-    const val ktlint = "0.40.0"
-}
-
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha08"
 
