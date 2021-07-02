@@ -1,5 +1,6 @@
 object Versions {
   const val kotlin = "1.5.10"
+  const val gradle = "4.2.1"
   const val material = "1.2.1"
   const val ktlint = "0.41.0"
 
