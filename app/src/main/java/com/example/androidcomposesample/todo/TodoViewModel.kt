@@ -9,14 +9,15 @@ import androidx.lifecycle.ViewModel
 
 class TodoViewModel: ViewModel() {
 
-    var todoItems by mutableStateOf(listOf<TodoItem>())
-        private set
+//    var todoItems by mutableStateOf(listOf<TodoItem>())
+//        private set
 
-//    private var _todoItems = MutableLiveData(listOf<TodoItem>())
-//    val todoItems: LiveData<List<TodoItem>> = _todoItems
+    private var _todoItems = MutableLiveData(listOf<TodoItem>())
+    val todoItems: LiveData<List<TodoItem>> = _todoItems
 
     fun addItem(item: TodoItem) {
-        todoItems = todoItems + listOf(item)
+//        todoItems = todoItems + listOf(item)
+        _todoItems.value = _todoItems.value!! + listOf(item)
     }
 
     fun removeItem(item: TodoItem) {

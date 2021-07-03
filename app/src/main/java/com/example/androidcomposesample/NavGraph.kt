@@ -9,6 +9,7 @@ import com.example.androidcomposesample.MainDestinations.INDEX_LABEL_KEY
 import com.example.androidcomposesample.grid.GridDetailPage
 import com.example.androidcomposesample.grid.GridPage
 import com.example.androidcomposesample.todo.TodoActivityScreen
+import com.example.androidcomposesample.todo.TodoViewModel
 
 object MainDestinations {
     const val PLAYGROUND_ROUTE = "playground"
@@ -53,7 +54,7 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
             GridDetailPage(arguments)
         }
         composable(MainDestinations.TODO_PAGE_ROUTE) {
-            TodoActivityScreen()
+            TodoActivityScreen(TodoViewModel())
         }
     }
 }

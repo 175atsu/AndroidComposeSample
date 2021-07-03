@@ -40,6 +40,8 @@ object Deps {
 
     const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
 
+    const val livedata ="androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
     object Compose {
       const val ui = "androidx.compose.ui:ui:${Versions.Androidx.compose}"
       const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.Androidx.compose}"

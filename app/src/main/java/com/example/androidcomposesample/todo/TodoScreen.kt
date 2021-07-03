@@ -4,9 +4,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -22,9 +23,9 @@ import com.example.androidcomposesample.R
 
 @Composable
 fun TodoActivityScreen(
+  viewModel: TodoViewModel
 ) {
-  val viewModel = TodoViewModel()
-  val items = listOf<TodoItem>()
+  val items: List<TodoItem> by viewModel.todoItems.observeAsState(listOf())
   TodoScreen(
     items,
     onAddItem = { viewModel.addItem(it) },
