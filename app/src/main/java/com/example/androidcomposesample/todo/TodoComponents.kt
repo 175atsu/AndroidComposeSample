@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlin.random.Random
 
 @Composable
 fun TodoItemInputBackground(
@@ -179,11 +180,17 @@ fun TodoRow(
       .padding(horizontal = 16.dp, vertical = 8.dp)
   ) {
     Text(todo.task)
+    val iconAlpha: Float = remember(todo.id) { randomTint() }
     Icon(
       imageVector = todo.icon.imageVector,
+      tint = LocalContentColor.current.copy(alpha = iconAlpha),
       contentDescription = stringResource(id = todo.icon.contentDescription)
     )
   }
+}
+
+private fun randomTint(): Float {
+  return Random.nextFloat().coerceIn(0.3f, 0.9f)
 }
 
 @Preview
