@@ -17,108 +17,83 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.androidcomposesample.R
 
 @Composable
-fun TodoScreen() {
-    val viewModel = TodoViewModel()
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
+fun TodoActivityScreen(
+) {
+  val viewModel = TodoViewModel()
+  val items = listOf<TodoItem>()
+  TodoScreen(
+    items,
+    onAddItem = { viewModel.addItem(it) },
+    onRemoveItem = { viewModel.removeItem(it) }
+  )
+}
+
+@Composable
+fun TodoScreen(
+  items: List<TodoItem>,
+  onAddItem: (TodoItem) -> Unit,
+  onRemoveItem: (TodoItem) -> Unit
+) {
+  Column {
+
+    LazyColumn(
+      modifier = Modifier.weight(1f),
+      contentPadding = PaddingValues(top = 8.dp)
     ) {
-        val (topLabel, todoItem, randomButton) = createRefs()
-        val enableTopSection = true
-        TodoItemInputBackground(
-            elevate = enableTopSection,
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(topLabel) {
-                    top.linkTo(parent.top,44.dp)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }) {
-            if (enableTopSection) {
-                TodoItemInput({}, false)
-            } else {
-                Text(
-                    text = "Editing item",
-                    style = MaterialTheme.typography.h6,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                )
-            }
-        }
-        LazyColumn(
-            contentPadding = PaddingValues(top = 8.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(todoItem) {
-                    top.linkTo(topLabel.bottom)
-                }
-        ) {
-            items(items = viewModel.todoItems) { todo ->
-                TodoRow(todo)
-            }
-        }
-        Button(
-            onClick = { viewModel.addItem(generateRandomTodoItem()) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .constrainAs(randomButton) {
-                    bottom.linkTo(parent.bottom, margin = 16.dp)
-                }) {
-            Text(stringResource(R.string.todo_random_button))
-        }
+      items(items = items) {
+        TodoRow(
+          todo = it,
+          onItemClicked = { onRemoveItem(it) },
+          modifier = Modifier.fillParentMaxWidth()
+        )
+      }
     }
+    Button(
+      onClick = { onAddItem(generateRandomTodoItem()) },
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)
+    ) {
+      Text(stringResource(R.string.todo_random_button))
+    }
+  }
 }
 
 @Composable
 fun TodoItemInput(
-    onItemComplete: (TodoItem) -> Unit,
-    iconsVisible: Boolean
+  onItemComplete: (TodoItem) -> Unit,
+  iconsVisible: Boolean
 ) {
-    val (text, onTextChange) = rememberSaveable { mutableStateOf("") }
-    val (icon, onIconChange) = remember { mutableStateOf(TodoIcon.Default) }
+  val (text, onTextChange) = rememberSaveable { mutableStateOf("") }
+  val (icon, onIconChange) = remember { mutableStateOf(TodoIcon.Default) }
 
-    val submit = {
-        if (text.isNotBlank()) {
-            onItemComplete(TodoItem(text, icon))
-            onTextChange("")
-            onIconChange(TodoIcon.Default)
-        }
+  val submit = {
+    if (text.isNotBlank()) {
+      onItemComplete(TodoItem(text, icon))
+      onTextChange("")
+      onIconChange(TodoIcon.Default)
     }
-    Column {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
-        ) {
-            TodoInputText(text = text, onTextChange = onTextChange)
-            TodoEditButton(onClick = submit, enabled = text.isNotBlank())
-        }
-        if (text.isNotBlank()) {
-            AnimatedIconRow(
-                icon = icon,
-                onIconChange = onIconChange,
-                modifier = Modifier.padding(top = 8.dp),
-            )
-        } else {
-            Spacer(Modifier.height(16.dp))
-        }
+  }
+  Column {
+    Row(
+      verticalAlignment = Alignment.CenterVertically,
+      modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+    ) {
+      TodoInputText(text = text, onTextChange = onTextChange)
+      TodoEditButton(onClick = submit, enabled = text.isNotBlank())
     }
-}
-
-@Preview
-@Composable
-fun PreviewScreen() {
-    TodoScreen()
-}
-
-@Preview
-@Composable
-fun PreviewTodoItemInput() {
-    TodoItemInput({}, true)
+    if (text.isNotBlank()) {
+      AnimatedIconRow(
+        icon = icon,
+        onIconChange = onIconChange,
+        modifier = Modifier.padding(top = 8.dp),
+      )
+    } else {
+      Spacer(Modifier.height(16.dp))
+    }
+  }
 }

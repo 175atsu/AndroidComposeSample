@@ -50,6 +50,7 @@ dependencies {
     implementation(Deps.AndroidX.Compose.ui)
     implementation(Deps.AndroidX.Compose.uiTooling)
     implementation(Deps.AndroidX.Compose.foundation)
+    implementation(Deps.AndroidX.Compose.foundationLayout)
     implementation(Deps.AndroidX.Compose.material)
     implementation(Deps.AndroidX.Compose.materialIconsCore)
     implementation(Deps.AndroidX.Compose.materialIconExtended)
