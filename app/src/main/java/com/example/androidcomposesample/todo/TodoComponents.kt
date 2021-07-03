@@ -64,7 +64,7 @@ fun TodoInputText(
     keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
     keyboardActions = KeyboardActions(onDone = {
       onImeAction()
-      keyboardController?.hideSoftwareKeyboard()
+      keyboardController?.hide()
     }),
     modifier = modifier
   )
@@ -74,7 +74,7 @@ fun TodoInputText(
 fun TodoEditButton(
   onClick: () -> Unit,
   modifier: Modifier = Modifier,
-  enabled: Boolean = true
+  enabled: Boolean
 ) {
   TextButton(
     onClick = onClick,
