@@ -6,6 +6,7 @@
     <string name="grid_page">GridPage</string>
     <string name="todo_page">TodoPage</string>
     <string name="todo_random_button">Add random item</string>
+    <string name="todo_editing_item">Editing item</string>
 
     <string name="cd_crop_square" tools:ignore="ExtraTranslation">Crop</string>
     <string name="cd_done">Done</string>
