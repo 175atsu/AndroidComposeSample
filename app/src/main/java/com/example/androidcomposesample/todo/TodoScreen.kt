@@ -25,10 +25,9 @@ import com.example.androidcomposesample.R
 fun TodoActivityScreen(
   viewModel: TodoViewModel
 ) {
-  val items: List<TodoItem> by viewModel.todoItems.observeAsState(listOf())
   TodoScreen(
-    items,
-    onAddItem = { viewModel.addItem(it) },
+    items = viewModel.todoItems,
+    onAddItem = viewModel::addItem,
     onRemoveItem = { viewModel.removeItem(it) }
   )
 }
@@ -44,7 +43,7 @@ fun TodoScreen(
       elevate = true,
       modifier = Modifier.fillMaxWidth()
     ) {
-      TodoItemInput2(onAddItem)
+      TodoItemEntryInput(onAddItem)
     }
     LazyColumn(
       modifier = Modifier.weight(1f),
@@ -70,13 +69,7 @@ fun TodoScreen(
 }
 
 @Composable
-fun TodoInputTextField(text: String, onTextChange: (String) -> Unit, modifier: Modifier) {
-//  val (text, setText) = remember { mutableStateOf("") }
-  TodoInputText(text, onTextChange, modifier)
-}
-
-@Composable
-fun TodoItemInput2(onItemComplete: (TodoItem) -> Unit) {
+fun TodoItemEntryInput(onItemComplete: (TodoItem) -> Unit) {
   val (text, setText) = remember { mutableStateOf("") }
   val (icon, setIcon) = remember { mutableStateOf(TodoIcon.Default) }
   val iconsVisible = text.isNotBlank()
@@ -85,12 +78,23 @@ fun TodoItemInput2(onItemComplete: (TodoItem) -> Unit) {
     setIcon(TodoIcon.Default)
     setText("")
   }
+  TodoItemInput2(text, setText, icon, setIcon, submit, iconsVisible)
+}
 
+@Composable
+fun TodoItemInput2(
+  text: String,
+  onTextChange: (String) -> Unit,
+  icon: TodoIcon,
+  onIconChange: (TodoIcon) -> Unit,
+  submit: () -> Unit,
+  iconsVisible: Boolean
+) {
   Column {
     Row {
       TodoInputText(
         text = text,
-        onTextChange = setText,
+        onTextChange = onTextChange,
         Modifier
           .weight(1f)
           .padding(end = 8.dp),
@@ -103,7 +107,7 @@ fun TodoItemInput2(onItemComplete: (TodoItem) -> Unit) {
       )
     }
     if (iconsVisible) {
-      AnimatedIconRow(icon, setIcon, Modifier.padding(top = 8.dp))
+      AnimatedIconRow(icon, onIconChange, Modifier.padding(top = 8.dp))
     } else {
       Spacer(modifier = Modifier.height(16.dp))
     }
