@@ -61,4 +61,8 @@ dependencies {
 
   implementation(Deps.Accompanist.coil)
 
-}
+  testImplementation(Deps.AndroidX.Test.core)
+  testImplementation(Deps.AndroidX.Test.runner)
+  testImplementation(Deps.AndroidX.Test.rules)
+  testImplementation(Deps.AndroidX.Test.junit)
+  testImplementation(Deps.AndroidX.Test.truth)}

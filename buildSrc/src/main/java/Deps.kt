@@ -67,11 +67,11 @@ object Deps {
     }
 
     object Test {
-      private const val version = "1.3.0"
-      const val core = "androidx.test:core:$version"
-      const val rules = "androidx.test:rules:$version"
-
-      const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
+      const val core = "androidx.test:core-ktx:${Versions.Androidx.Test.core}"
+      const val runner = "androidx.test:runner:${Versions.Androidx.Test.runner}"
+      const val rules = "androidx.test:rules:${Versions.Androidx.Test.rules}"
+      const val junit = "androidx.test.ext:junit-ktx:${Versions.Androidx.Test.junit}"
+      const val truth = "androidx.test.ext:truth:${Versions.Androidx.Test.truth}"
     }
   }
 }
