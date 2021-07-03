@@ -1,6 +1,7 @@
 package com.example.androidcomposesample.grid
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,56 +16,55 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.chrisbanes.accompanist.coil.CoilImage
+import com.google.accompanist.coil.rememberCoilPainter
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun GridPage(
-    actionToGridDetail: (String) -> Unit
+  actionToGridDetail: (String) -> Unit
 ) {
-    val names = List(100) { "Grid #$it !" }
-    LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
-        contentPadding = PaddingValues(8.dp)
+  val names = List(100) { "Grid #$it !" }
+  LazyVerticalGrid(
+    cells = GridCells.Fixed(2),
+    contentPadding = PaddingValues(8.dp)
 
-    ) {
-        items(names.size) { index ->
-            GridCard(
-                label = names[index],
-                onItemClick = { actionToGridDetail(index.toString()) })
-        }
+  ) {
+    items(names.size) { index ->
+      GridCard(
+        label = names[index],
+        onItemClick = { actionToGridDetail(index.toString()) })
     }
+  }
 }
 
 @Composable
 fun GridCard(label: String, onItemClick: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = Color.Gray,
-                shape = RoundedCornerShape(4.dp)
-            )
-            .clickable(onClick = onItemClick)
+  Card(
+    modifier = Modifier
+      .padding(8.dp)
+      .fillMaxWidth()
+      .border(
+        width = 1.dp,
+        color = Color.Gray,
+        shape = RoundedCornerShape(4.dp)
+      )
+      .clickable(onClick = onItemClick)
+  ) {
+    Column(
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            CoilImage(
-                data = "https://developer.android.com/images/brand/Android_Robot.png",
-                contentDescription = "Android Logo",
-                modifier = Modifier.size(50.dp)
-            )
-            Text(text = label)
-        }
+      Image(
+        painter = rememberCoilPainter("https://developer.android.com/images/brand/Android_Robot.png"),
+        contentDescription = "Android Logo"
+      )
+      Text(text = label)
     }
+  }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview("gridPage")
 @Composable
 fun PreviewGridPage() {
-    GridPage(actionToGridDetail = {})
+  GridPage(actionToGridDetail = {})
 }

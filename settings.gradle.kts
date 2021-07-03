@@ -1,2 +1,2 @@
 rootProject.name = "AndroidComposeSample"
-include ':app'
+include(":app")
