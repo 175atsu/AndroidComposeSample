@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.androidcomposesample.MainDestinations.INDEX_LABEL_KEY
 import com.example.androidcomposesample.grid.GridDetailPage
 import com.example.androidcomposesample.grid.GridPage
-import com.example.androidcomposesample.thema.ThemeScreen
+import com.example.androidcomposesample.theming.ThemeScreen
 import com.example.androidcomposesample.todo.TodoActivityScreen
 import com.example.androidcomposesample.todo.TodoViewModel
 

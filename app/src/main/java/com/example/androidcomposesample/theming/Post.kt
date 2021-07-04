@@ -1,7 +1,6 @@
-package com.example.androidcomposesample.thema
+package com.example.androidcomposesample.theming
 
 import androidx.annotation.DrawableRes
-import androidx.compose.runtime.Immutable
 import com.example.androidcomposesample.R
 
 data class Post(
@@ -31,12 +30,10 @@ object PostRepo {
   fun getFeaturedPost(): Post = posts.random()
 }
 
-
 private val pietro = PostAuthor("Pietro Maggi", "https://medium.com/@pmaggi")
 private val manuel = PostAuthor("Manuel Vivo", "https://medium.com/@manuelvicnt")
 private val florina = PostAuthor("Florina Muntenescu", "https://medium.com/@florina.muntenescu")
 private val jose = PostAuthor("Jose Alcérreca", "https://medium.com/@JoseAlcerreca")
-
 
 private val post1 = Post(
   id = 1L,
