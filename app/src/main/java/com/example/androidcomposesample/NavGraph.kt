@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.androidcomposesample.MainDestinations.INDEX_LABEL_KEY
 import com.example.androidcomposesample.grid.GridDetailPage
 import com.example.androidcomposesample.grid.GridPage
+import com.example.androidcomposesample.thema.ThemeScreen
 import com.example.androidcomposesample.todo.TodoActivityScreen
 import com.example.androidcomposesample.todo.TodoViewModel
 
@@ -22,6 +23,7 @@ object MainDestinations {
   const val GRID_DETAIL_PAGE_ROUTE = "gridDetailPage"
   const val INDEX_LABEL_KEY = "indexLabel"
   const val TODO_PAGE_ROUTE = "todoPage"
+  const val TODO_THEME_ROUTE = "themePage"
 }
 
 @Composable
@@ -35,7 +37,8 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
         actionToBasics = actions.toBasicsPage,
         actionToList = actions.toListPage,
         actionToGrid = actions.toGridPage,
-        actionToTodo = actions.toTodoPage
+        actionToTodo = actions.toTodoPage,
+        actionToTheme = actions.toThemePage
       )
     }
     composable(MainDestinations.BASICS_PAGE_ROUTE) {
@@ -59,6 +62,9 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
     composable(MainDestinations.TODO_PAGE_ROUTE) {
       TodoActivityScreen(TodoViewModel())
     }
+    composable(MainDestinations.TODO_THEME_ROUTE) {
+      ThemeScreen()
+    }
   }
 }
 
@@ -77,5 +83,8 @@ class MainActions(navController: NavHostController) {
   }
   val toTodoPage: () -> Unit = {
     navController.navigate(MainDestinations.TODO_PAGE_ROUTE)
+  }
+  val toThemePage: () -> Unit = {
+    navController.navigate(MainDestinations.TODO_THEME_ROUTE)
   }
 }
