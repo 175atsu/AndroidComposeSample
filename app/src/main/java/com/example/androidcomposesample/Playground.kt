@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -19,7 +20,8 @@ fun Playground(
   actionToBasics: () -> Unit,
   actionToList: () -> Unit,
   actionToGrid: () -> Unit,
-  actionToTodo: () -> Unit
+  actionToTodo: () -> Unit,
+  actionToTheme: () -> Unit
 ) {
   val typography = MaterialTheme.typography
   MaterialTheme {
@@ -41,40 +43,47 @@ fun Playground(
           color = Color.White
         )
       }
-      Button(
-        onClick = actionToList,
-        colors = ButtonDefaults.buttonColors(Color.DarkGray),
-        modifier = Modifier.padding(8.dp)
-      ) {
-        Text(
-          stringResource(R.string.list_page),
-          style = typography.body1,
-          color = Color.White
-        )
-      }
-      Button(
-        onClick = actionToGrid,
-        colors = ButtonDefaults.buttonColors(Color.DarkGray),
-        modifier = Modifier.padding(8.dp)
-      ) {
-        Text(
-          stringResource(R.string.grid_page),
-          style = typography.body1,
-          color = Color.White
-        )
-      }
-      Button(
-        onClick = actionToTodo,
-        colors = ButtonDefaults.buttonColors(Color.DarkGray),
-        modifier = Modifier.padding(8.dp)
-      ) {
-        Text(
-          stringResource(R.string.todo_page),
-          style = typography.body1,
-          color = Color.White
-        )
-      }
+      ToPageButton(
+        actionToList,
+        R.string.list_page,
+        Modifier.padding(8.dp)
+      )
+      ToPageButton(
+        actionToGrid,
+        R.string.grid_page,
+        Modifier.padding(8.dp)
+      )
+      ToPageButton(
+        actionToTodo,
+        R.string.todo_page,
+        Modifier.padding(8.dp)
+      )
+      ToPageButton(
+        actionToTheme,
+        R.string.theme_page,
+        Modifier.padding(8.dp)
+      )
     }
+  }
+}
+
+@Composable
+fun ToPageButton(
+  toPage: () -> Unit,
+  textResource: Int,
+  modifier: Modifier = Modifier
+) {
+  val typography = MaterialTheme.typography
+  Button(
+    onClick = toPage,
+    colors = ButtonDefaults.buttonColors(Color.DarkGray),
+    modifier = modifier
+  ) {
+    Text(
+      text = stringResource(textResource),
+      style = typography.body1,
+      color = Color.White
+    )
   }
 }
 
@@ -85,6 +94,7 @@ private fun PlaygroundPreview() {
     actionToBasics = { },
     actionToList = { },
     actionToGrid = { },
-    actionToTodo = { }
+    actionToTodo = { },
+    actionToTheme = {}
   )
 }
