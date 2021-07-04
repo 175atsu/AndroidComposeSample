@@ -7,10 +7,10 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun GridDetailPage(args: Bundle?) {
-    val label = args?.getString("indexLabel")
-    if (label != null) {
-        Text(text = label)
-    }
+  val label = args?.getString("indexLabel")
+  if (label != null) {
+    Text(text = label)
+  }
 }
 
 @Preview("gridDetailPage")
