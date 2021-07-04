@@ -32,4 +32,6 @@ object Versions {
   object Accompanist {
     const val coil = "0.12.0"
   }
+
+  const val exoplayer = "2.14.1"
 }
