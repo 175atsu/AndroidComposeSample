@@ -1,12 +1,9 @@
 package com.example.androidcomposesample.todo
 
-import android.system.Os.remove
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class TodoViewModel : ViewModel() {
@@ -19,11 +16,7 @@ class TodoViewModel : ViewModel() {
   val currentEditItem: TodoItem?
     get() = todoItems.getOrNull(currentEditPosition)
 
-//  private var _todoItems = MutableLiveData(listOf<TodoItem>())
-//  val todoItems: LiveData<List<TodoItem>> = _todoItems
-
   fun addItem(item: TodoItem) {
-//        todoItems = todoItems + listOf(item)
     todoItems.add(item)
   }
 

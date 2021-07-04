@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.androidcomposesample.R
 import kotlin.random.Random
 
 @Composable
@@ -82,7 +83,7 @@ fun TodoEditButton(
     enabled = enabled,
     modifier = modifier
   ) {
-    Text("Add")
+    Text(stringResource(R.string.todo_add))
   }
 }
 
