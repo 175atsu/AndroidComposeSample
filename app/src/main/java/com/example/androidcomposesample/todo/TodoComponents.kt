@@ -63,10 +63,12 @@ fun TodoInputText(
     colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
     maxLines = 1,
     keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-    keyboardActions = KeyboardActions(onDone = {
-      onImeAction()
-      keyboardController?.hide()
-    }),
+    keyboardActions = KeyboardActions(
+      onDone = {
+        onImeAction()
+        keyboardController?.hide()
+      }
+    ),
     modifier = modifier
   )
 }

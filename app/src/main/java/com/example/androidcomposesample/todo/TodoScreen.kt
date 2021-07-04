@@ -168,7 +168,6 @@ fun TodoItemInput(
 
       Spacer(modifier = Modifier.width(8.dp))
       Box(Modifier.align(Alignment.CenterVertically)) { buttonSlot() }
-
     }
     if (iconsVisible) {
       AnimatedIconRow(icon, onIconChange, Modifier.padding(top = 8.dp))

@@ -2,7 +2,11 @@ package com.example.androidcomposesample
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,75 +16,75 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Playground(
-    actionToBasics: () -> Unit,
-    actionToList: () -> Unit,
-    actionToGrid: () -> Unit,
-    actionToTodo: () -> Unit
+  actionToBasics: () -> Unit,
+  actionToList: () -> Unit,
+  actionToGrid: () -> Unit,
+  actionToTodo: () -> Unit
 ) {
-    val typography = MaterialTheme.typography
-    MaterialTheme {
-        Column {
-            Text(
-                text = stringResource(R.string.playground),
-                style = typography.h3,
-                modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            TextButton(
-                onClick = actionToBasics,
-                colors = ButtonDefaults.buttonColors(Color.DarkGray),
-                modifier = Modifier.padding(8.dp),
-                elevation = ButtonDefaults.elevation()
-            ) {
-                Text(
-                    stringResource(R.string.basics_page),
-                    style = typography.body1,
-                    color = Color.White
-                )
-            }
-            Button(
-                onClick = actionToList,
-                colors = ButtonDefaults.buttonColors(Color.DarkGray),
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text(
-                    stringResource(R.string.list_page),
-                    style = typography.body1,
-                    color = Color.White
-                )
-            }
-            Button(
-                onClick = actionToGrid,
-                colors = ButtonDefaults.buttonColors(Color.DarkGray),
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text(
-                    stringResource(R.string.grid_page),
-                    style = typography.body1,
-                    color = Color.White
-                )
-            }
-            Button(
-                onClick = actionToTodo,
-                colors = ButtonDefaults.buttonColors(Color.DarkGray),
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text(
-                    stringResource(R.string.todo_page),
-                    style = typography.body1,
-                    color = Color.White
-                )
-            }
-        }
+  val typography = MaterialTheme.typography
+  MaterialTheme {
+    Column {
+      Text(
+        text = stringResource(R.string.playground),
+        style = typography.h3,
+        modifier = Modifier.padding(horizontal = 8.dp)
+      )
+      TextButton(
+        onClick = actionToBasics,
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
+        modifier = Modifier.padding(8.dp),
+        elevation = ButtonDefaults.elevation()
+      ) {
+        Text(
+          stringResource(R.string.basics_page),
+          style = typography.body1,
+          color = Color.White
+        )
+      }
+      Button(
+        onClick = actionToList,
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
+        modifier = Modifier.padding(8.dp)
+      ) {
+        Text(
+          stringResource(R.string.list_page),
+          style = typography.body1,
+          color = Color.White
+        )
+      }
+      Button(
+        onClick = actionToGrid,
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
+        modifier = Modifier.padding(8.dp)
+      ) {
+        Text(
+          stringResource(R.string.grid_page),
+          style = typography.body1,
+          color = Color.White
+        )
+      }
+      Button(
+        onClick = actionToTodo,
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
+        modifier = Modifier.padding(8.dp)
+      ) {
+        Text(
+          stringResource(R.string.todo_page),
+          style = typography.body1,
+          color = Color.White
+        )
+      }
     }
+  }
 }
 
 @Preview(name = "Playground")
 @Composable
 private fun PlaygroundPreview() {
-    Playground(
-        actionToBasics = { },
-        actionToList = { },
-        actionToGrid = { },
-        actionToTodo = { }
-    )
+  Playground(
+    actionToBasics = { },
+    actionToList = { },
+    actionToGrid = { },
+    actionToTodo = { }
+  )
 }
