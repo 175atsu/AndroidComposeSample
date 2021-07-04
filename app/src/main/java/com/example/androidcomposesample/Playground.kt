@@ -21,7 +21,8 @@ fun Playground(
   actionToList: () -> Unit,
   actionToGrid: () -> Unit,
   actionToTodo: () -> Unit,
-  actionToTheme: () -> Unit
+  actionToTheme: () -> Unit,
+  actionToInstagram: () -> Unit,
 ) {
   val typography = MaterialTheme.typography
   MaterialTheme {
@@ -63,6 +64,11 @@ fun Playground(
         R.string.theme_page,
         Modifier.padding(8.dp)
       )
+      ToPageButton(
+        actionToInstagram,
+        R.string.instagram_page,
+        Modifier.padding(8.dp)
+      )
     }
   }
 }
@@ -95,6 +101,7 @@ private fun PlaygroundPreview() {
     actionToList = { },
     actionToGrid = { },
     actionToTodo = { },
-    actionToTheme = {}
+    actionToTheme = { },
+    actionToInstagram = { }
   )
 }
