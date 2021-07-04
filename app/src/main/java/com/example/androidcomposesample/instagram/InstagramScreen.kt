@@ -28,7 +28,6 @@ import com.example.androidcomposesample.instagram.data.InstagramUser
 import com.example.androidcomposesample.instagram.data.dummyUser
 import com.example.androidcomposesample.instagram.data.postList
 import com.example.androidcomposesample.theming.Header
-import com.example.androidcomposesample.theming.Post
 import com.google.accompanist.coil.rememberCoilPainter
 
 @Composable
@@ -90,6 +89,8 @@ fun PostInfo(
   Column {
     PostHeader(post.user)
     PostImage(post.postImage)
+    PostIcons()
+    PostComment(post)
   }
 }
 
@@ -138,4 +139,59 @@ fun PostImage(
     contentScale = ContentScale.Crop,
     modifier = Modifier.fillMaxWidth()
   )
+}
+
+@Composable
+fun PostIcons() {
+  Row(
+    verticalAlignment = Alignment.CenterVertically,
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(8.dp)
+  ) {
+    Icon(
+      painter = painterResource(R.drawable.ic_favorite_border_black_32dp),
+      contentDescription = null
+    )
+    Icon(
+      painter = painterResource(R.drawable.ic_chat_bubble_outline_black_32dp),
+      contentDescription = null,
+      modifier = Modifier
+        .padding(start = 8.dp)
+    )
+    Icon(
+      painter = painterResource(R.drawable.ic_near_me_black_32dp),
+      contentDescription = null,
+      modifier = Modifier
+        .padding(start = 8.dp)
+    )
+    Icon(
+      painter = painterResource(R.drawable.ic_near_me_black_32dp),
+      contentDescription = null,
+      modifier = Modifier
+        .padding(start = 8.dp)
+        .weight(1f)
+    )
+    Icon(
+      painter = painterResource(R.drawable.ic_bookmark_border_black_32dp),
+      contentDescription = null,
+      modifier = Modifier
+    )
+  }
+}
+
+@Composable
+fun PostComment(
+  post: InstagramPost
+) {
+  Column(
+    modifier = Modifier.padding(8.dp, 0.dp)
+  ) {
+    Text(
+      text = stringResource(R.string.instagram_like, post.like)
+    )
+    Text(
+      text = post.user.name + post.content
+    )
+  }
 }
