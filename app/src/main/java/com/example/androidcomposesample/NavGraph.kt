@@ -13,6 +13,7 @@ import com.example.androidcomposesample.grid.GridDetailPage
 import com.example.androidcomposesample.grid.GridPage
 import com.example.androidcomposesample.instagram.InstagramScreen
 import com.example.androidcomposesample.theming.ThemeScreen
+import com.example.androidcomposesample.tiktok.TikTokScreen
 import com.example.androidcomposesample.todo.TodoActivityScreen
 import com.example.androidcomposesample.todo.TodoViewModel
 
@@ -24,8 +25,10 @@ object MainDestinations {
   const val GRID_DETAIL_PAGE_ROUTE = "gridDetailPage"
   const val INDEX_LABEL_KEY = "indexLabel"
   const val TODO_PAGE_ROUTE = "todoPage"
-  const val TODO_THEME_ROUTE = "themePage"
-  const val TODO_INSTAGRAM_ROUTE = "instagramPage"
+  const val THEME_PAGE_ROUTE = "themePage"
+  const val INSTAGRAM_PAGE_ROUTE = "instagramPage"
+  const val TIKTOK_PAGE_ROUTE = "tiktokPage"
+
 }
 
 @Composable
@@ -41,7 +44,8 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
         actionToGrid = actions.toGridPage,
         actionToTodo = actions.toTodoPage,
         actionToTheme = actions.toThemePage,
-        actionToInstagram = actions.toInstagramPage
+        actionToInstagram = actions.toInstagramPage,
+        actionToTikTok = actions.toTikTokPage
       )
     }
     composable(MainDestinations.BASICS_PAGE_ROUTE) {
@@ -65,11 +69,14 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
     composable(MainDestinations.TODO_PAGE_ROUTE) {
       TodoActivityScreen(TodoViewModel())
     }
-    composable(MainDestinations.TODO_THEME_ROUTE) {
+    composable(MainDestinations.THEME_PAGE_ROUTE) {
       ThemeScreen()
     }
-    composable(MainDestinations.TODO_INSTAGRAM_ROUTE) {
+    composable(MainDestinations.INSTAGRAM_PAGE_ROUTE) {
       InstagramScreen()
+    }
+    composable(MainDestinations.TIKTOK_PAGE_ROUTE) {
+      TikTokScreen()
     }
   }
 }
@@ -91,9 +98,12 @@ class MainActions(navController: NavHostController) {
     navController.navigate(MainDestinations.TODO_PAGE_ROUTE)
   }
   val toThemePage: () -> Unit = {
-    navController.navigate(MainDestinations.TODO_THEME_ROUTE)
+    navController.navigate(MainDestinations.THEME_PAGE_ROUTE)
   }
   val toInstagramPage: () -> Unit = {
-    navController.navigate(MainDestinations.TODO_INSTAGRAM_ROUTE)
+    navController.navigate(MainDestinations.INSTAGRAM_PAGE_ROUTE)
+  }
+  val toTikTokPage: () -> Unit = {
+    navController.navigate(MainDestinations.TIKTOK_PAGE_ROUTE)
   }
 }
