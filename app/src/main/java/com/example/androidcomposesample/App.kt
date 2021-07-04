@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun App() {
-    MaterialTheme {
-        NavGraph()
-    }
+  MaterialTheme {
+    NavGraph()
+  }
 }
