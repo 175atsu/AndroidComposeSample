@@ -2,10 +2,14 @@ package com.example.androidcomposesample.todo
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.CropSquare
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.PrivacyTip
+import androidx.compose.material.icons.filled.RestoreFromTrash
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.androidcomposesample.R
-import java.util.*
+import java.util.UUID
 
 data class TodoItem(
   val task: String,
