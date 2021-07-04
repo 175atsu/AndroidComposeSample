@@ -11,6 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.androidcomposesample.MainDestinations.INDEX_LABEL_KEY
 import com.example.androidcomposesample.grid.GridDetailPage
 import com.example.androidcomposesample.grid.GridPage
+import com.example.androidcomposesample.todo.TodoActivityScreen
+import com.example.androidcomposesample.todo.TodoViewModel
 
 object MainDestinations {
   const val PLAYGROUND_ROUTE = "playground"
@@ -19,6 +21,7 @@ object MainDestinations {
   const val GRID_PAGE_ROUTE = "gridPage"
   const val GRID_DETAIL_PAGE_ROUTE = "gridDetailPage"
   const val INDEX_LABEL_KEY = "indexLabel"
+  const val TODO_PAGE_ROUTE = "todoPage"
 }
 
 @Composable
@@ -31,7 +34,8 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
       Playground(
         actionToBasics = actions.toBasicsPage,
         actionToList = actions.toListPage,
-        actionToGrid = actions.toGridPage
+        actionToGrid = actions.toGridPage,
+        actionToTodo = actions.toTodoPage
       )
     }
     composable(MainDestinations.BASICS_PAGE_ROUTE) {
@@ -52,6 +56,9 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
       val arguments = requireNotNull(backStackEntry.arguments)
       GridDetailPage(arguments)
     }
+    composable(MainDestinations.TODO_PAGE_ROUTE) {
+      TodoActivityScreen(TodoViewModel())
+    }
   }
 }
 
@@ -67,5 +74,8 @@ class MainActions(navController: NavHostController) {
   }
   val toGridDetailPage: (String) -> Unit = { label: String ->
     navController.navigate("${MainDestinations.GRID_DETAIL_PAGE_ROUTE}/$label")
+  }
+  val toTodoPage: () -> Unit = {
+    navController.navigate(MainDestinations.TODO_PAGE_ROUTE)
   }
 }

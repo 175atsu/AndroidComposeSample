@@ -18,6 +18,14 @@ object Versions {
     const val constraintlayout2 =  "1.0.0-alpha03"
     const val constraintlayout = "2.0.4"
     const val navigation = "2.4.0-alpha03"
+
+    object Test {
+      const val core = "1.3.0"
+      const val runner = "1.3.0"
+      const val rules = "1.3.0"
+      const val junit = "1.1.2"
+      const val truth = "1.3.0"
+    }
   }
 
   object Accompanist {

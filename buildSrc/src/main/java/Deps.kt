@@ -40,10 +40,13 @@ object Deps {
 
     const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
 
+    const val livedata ="androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
     object Compose {
       const val ui = "androidx.compose.ui:ui:${Versions.Androidx.compose}"
       const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.Androidx.compose}"
       const val foundation = "androidx.compose.foundation:foundation:${Versions.Androidx.compose}"
+      const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.Androidx.compose}"
       const val material = "androidx.compose.material:material:${Versions.Androidx.compose}"
       const val materialIconsCore = "androidx.compose.material:material-icons-core:${Versions.Androidx.compose}"
       const val materialIconExtended = "androidx.compose.material:material-icons-extended:${Versions.Androidx.compose}"
@@ -64,11 +67,11 @@ object Deps {
     }
 
     object Test {
-      private const val version = "1.3.0"
-      const val core = "androidx.test:core:$version"
-      const val rules = "androidx.test:rules:$version"
-
-      const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
+      const val core = "androidx.test:core-ktx:${Versions.Androidx.Test.core}"
+      const val runner = "androidx.test:runner:${Versions.Androidx.Test.runner}"
+      const val rules = "androidx.test:rules:${Versions.Androidx.Test.rules}"
+      const val junit = "androidx.test.ext:junit-ktx:${Versions.Androidx.Test.junit}"
+      const val truth = "androidx.test.ext:truth:${Versions.Androidx.Test.truth}"
     }
   }
 }
