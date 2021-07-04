@@ -18,6 +18,7 @@ object Versions {
     const val constraintlayout2 =  "1.0.0-alpha03"
     const val constraintlayout = "2.0.4"
     const val navigation = "2.4.0-alpha03"
+    const val pager = "0.13.0"
 
     object Test {
       const val core = "1.3.0"
