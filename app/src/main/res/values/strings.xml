@@ -17,5 +17,6 @@
 
     <string name="theme_page">ThemePage</string>
     <string name="theme_top_story">Top Story</string>
+    <string name="theme_popular">Popular</string>
     <string name="theme_read_time">%1$d min read</string>
 </resources>
