@@ -58,6 +58,8 @@ dependencies {
   implementation(Deps.AndroidX.Compose.constraintlayout)
   implementation(Deps.AndroidX.Compose.navigation)
   implementation(Deps.AndroidX.Compose.runtimeLiveData)
+  implementation(Deps.AndroidX.Compose.pager)
+  implementation(Deps.AndroidX.Compose.pagerIndicators)
 
   implementation(Deps.Accompanist.coil)
 
@@ -65,4 +67,5 @@ dependencies {
   testImplementation(Deps.AndroidX.Test.runner)
   testImplementation(Deps.AndroidX.Test.rules)
   testImplementation(Deps.AndroidX.Test.junit)
-  testImplementation(Deps.AndroidX.Test.truth)}
+  testImplementation(Deps.AndroidX.Test.truth)
+}

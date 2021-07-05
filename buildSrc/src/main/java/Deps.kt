@@ -53,6 +53,8 @@ object Deps {
       const val activity = "androidx.activity:activity-compose:${Versions.Androidx.activity}"
       const val constraintlayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.Androidx.constraintlayout2}"
       const val navigation = "androidx.navigation:navigation-compose:${Versions.Androidx.navigation}"
+      const val pager = "com.google.accompanist:accompanist-pager:${Versions.Androidx.pager}"
+      const val pagerIndicators = "com.google.accompanist:accompanist-pager-indicators:${Versions.Androidx.pager}"
 
       const val animation = "androidx.compose.animation:animation:${Versions.Androidx.compose}"
       const val layout = "androidx.compose.foundation:foundation-layout:${Versions.Androidx.compose}"
