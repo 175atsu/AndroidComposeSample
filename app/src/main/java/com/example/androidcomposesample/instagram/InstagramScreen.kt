@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -28,13 +27,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.transform.CircleCropTransformation
 import com.example.androidcomposesample.R
 import com.example.androidcomposesample.instagram.data.InstagramPost
 import com.example.androidcomposesample.instagram.data.InstagramUser
 import com.example.androidcomposesample.instagram.data.dummyUser
 import com.example.androidcomposesample.instagram.data.postList
-import com.google.accompanist.coil.rememberCoilPainter
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -78,21 +75,18 @@ fun InstagramHeader(
       contentScale = ContentScale.Fit,
     )
     Spacer(modifier = Modifier.weight(1f))
-    Icon(
-      painter = painterResource(R.drawable.ic_chat_bubble_outline_black_26dp),
-      contentDescription = null,
-      modifier = Modifier
+    InstagramActionIcon(
+      R.drawable.ic_chat_bubble_outline_black_26dp,
+      Modifier
         .padding(end = 16.dp)
     )
-    Icon(
-      painter = painterResource(R.drawable.ic_favorite_border_black_26dp),
-      contentDescription = null,
-      modifier = Modifier
+    InstagramActionIcon(
+      R.drawable.ic_favorite_border_black_26dp,
+      Modifier
         .padding(end = 16.dp)
     )
-    Icon(
-      painter = painterResource(R.drawable.ic_near_me_black_26dp),
-      contentDescription = null,
+    InstagramActionIcon(
+      R.drawable.ic_near_me_black_26dp
     )
   }
 }
@@ -116,14 +110,8 @@ fun UseIcon(
     modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    Image(
-      painter = rememberCoilPainter(
-        request = user.image,
-        requestBuilder = {
-          transformations(CircleCropTransformation())
-        }
-      ),
-      contentDescription = null,
+    CircleImage(
+      imageUrl = user.image,
       modifier = Modifier
         .width(64.dp)
     )
@@ -151,7 +139,7 @@ fun PostInfo(
         .fillMaxWidth(),
       contentAlignment = Alignment.Center
     ) {
-      PostIcons()
+      PostActionIcons()
       Indicators(pagerState)
     }
     PostComment(post)
@@ -167,14 +155,8 @@ fun PostHeader(
     verticalAlignment = Alignment.CenterVertically,
     modifier = modifier.padding(8.dp, 4.dp)
   ) {
-    Image(
-      painter = rememberCoilPainter(
-        request = user.image,
-        requestBuilder = {
-          transformations(CircleCropTransformation())
-        }
-      ),
-      contentDescription = null,
+    CircleImage(
+      imageUrl = user.image,
       modifier = Modifier
         .width(32.dp)
     )
@@ -185,10 +167,7 @@ fun PostHeader(
         .padding(start = 8.dp)
     )
     IconButton(onClick = { /*TODO*/ }) {
-      Icon(
-        painter = painterResource(R.drawable.ic_more_vert_black_24dp),
-        contentDescription = null
-      )
+      InstagramActionIcon(R.drawable.ic_more_vert_black_24dp)
     }
   }
 }
@@ -235,7 +214,7 @@ fun PostImage(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun PostIcons(
+fun PostActionIcons(
   modifier: Modifier = Modifier
 ) {
   Row(
@@ -243,27 +222,20 @@ fun PostIcons(
     modifier = modifier
       .padding(8.dp)
   ) {
-    Icon(
-      painter = painterResource(R.drawable.ic_favorite_border_black_26dp),
-      contentDescription = null
+    InstagramActionIcon(
+      R.drawable.ic_favorite_border_black_26dp,
     )
-    Icon(
-      painter = painterResource(R.drawable.ic_chat_bubble_outline_black_26dp),
-      contentDescription = null,
-      modifier = Modifier
-        .padding(start = 8.dp)
+    InstagramActionIcon(
+      R.drawable.ic_chat_bubble_outline_black_26dp,
+      Modifier.padding(start = 8.dp)
     )
-    Icon(
-      painter = painterResource(R.drawable.ic_near_me_black_26dp),
-      contentDescription = null,
-      modifier = Modifier
-        .padding(start = 8.dp)
+    InstagramActionIcon(
+      R.drawable.ic_near_me_black_26dp,
+      Modifier.padding(start = 8.dp)
     )
     Spacer(modifier = Modifier.weight(1f))
-    Icon(
-      painter = painterResource(R.drawable.ic_bookmark_border_black_26dp),
-      contentDescription = null,
-      modifier = Modifier
+    InstagramActionIcon(
+      R.drawable.ic_bookmark_border_black_26dp
     )
   }
 }
