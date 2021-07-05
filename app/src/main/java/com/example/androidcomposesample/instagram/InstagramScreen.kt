@@ -148,7 +148,8 @@ fun PostInfo(
     PostImage(post.postImage, pagerState)
     Box(
       modifier = Modifier
-        .fillMaxWidth()
+        .fillMaxWidth(),
+      contentAlignment = Alignment.Center
     ) {
       PostIcons()
       Indicators(pagerState)
@@ -274,7 +275,8 @@ fun Indicators(
 ) {
   HorizontalPagerIndicator(
     pagerState = pagerState,
-    modifier = Modifier.fillMaxWidth(),
+    modifier = Modifier
+      .padding(16.dp),
     indicatorWidth = 6.dp,
     activeColor = Color(35, 149, 246),
     inactiveColor = Color.Gray
