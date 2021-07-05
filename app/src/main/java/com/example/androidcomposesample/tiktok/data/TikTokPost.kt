@@ -7,7 +7,8 @@ data class TikTokPost(
   val comment: Int,
   val share: Int,
   val content: String,
-  val movieUrl: String
+  val movieUrl: String,
+  val musicTitle: String
 )
 
 val post1 = TikTokPost(
@@ -17,7 +18,8 @@ val post1 = TikTokPost(
   23,
   234,
   "テストテスト",
-  "t1.mp4"
+  "t1.mp4",
+  "アーティストアーティストアーティストアーティストアーティストアーティスト"
 )
 
 val post2 = TikTokPost(
@@ -27,7 +29,8 @@ val post2 = TikTokPost(
   3,
   345,
   "テストテスト2",
-  "t2.mp4"
+  "t2.mp4",
+  "アーティストアーティストアーティストアーティストアーティストアーティスト"
 )
 
 val post3 = TikTokPost(
@@ -37,7 +40,8 @@ val post3 = TikTokPost(
   2311,
   23411,
   "テストテストテストテストテストテストテストテストテストテストテストテストテストテスト",
-  "t3.mp4"
+  "t3.mp4",
+  "アーティストアーティストアーティストアーティストアーティストアーティスト"
 )
 
 val postList = listOf(

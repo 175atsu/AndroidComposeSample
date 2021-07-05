@@ -3,9 +3,11 @@ package com.example.androidcomposesample.tiktok
 import android.net.Uri
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -27,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -122,6 +124,17 @@ fun VideoInfoSection(
   post: TikTokPost,
   modifier: Modifier = Modifier
 ) {
+  val state = rememberScrollState()
+  LaunchedEffect(Unit) {
+    state.animateScrollTo(
+      state.maxValue,
+      animationSpec = infiniteRepeatable(
+        repeatMode = RepeatMode.Restart,
+        animation = tween(durationMillis = 3500, easing = LinearEasing),
+      ),
+    )
+  }
+
   Column(
     modifier = modifier
   ) {
@@ -136,9 +149,11 @@ fun VideoInfoSection(
       fontSize = 14.sp
     )
     Text(
-      text = post.content,
+      text = post.musicTitle,
       color = Color.White,
-      fontSize = 14.sp
+      fontSize = 14.sp,
+      modifier = Modifier
+        .horizontalScroll(state = state, enabled = false)
     )
   }
 }
@@ -147,6 +162,15 @@ fun VideoInfoSection(
 fun PostIcons(
   post: TikTokPost
 ) {
+  val rotation = remember { Animatable(0f) }
+  LaunchedEffect(Unit) {
+    rotation.animateTo(
+      targetValue = 360f,
+      animationSpec = infiniteRepeatable(
+        animation = tween(durationMillis = 3500, easing = LinearEasing),
+      ),
+    )
+  }
   Column(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
@@ -177,16 +201,6 @@ fun PostIcons(
       post.share.toString()
     )
     Spacer(modifier = Modifier.height(32.dp))
-    val rotation = remember { Animatable(0f) }
-    LaunchedEffect(Unit) {
-      rotation.animateTo(
-        targetValue = 360f,
-        animationSpec = repeatable(
-          iterations = 10000,
-          animation = tween(durationMillis = 3500, easing = LinearEasing),
-        ),
-      )
-    }
     Icon(
       painter = painterResource(R.drawable.ic_reply_white_24dp),
       contentDescription = null,
