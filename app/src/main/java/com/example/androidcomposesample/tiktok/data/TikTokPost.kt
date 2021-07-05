@@ -43,4 +43,3 @@ val post3 = TikTokPost(
 val postList = listOf(
   post1, post2, post3
 )
-

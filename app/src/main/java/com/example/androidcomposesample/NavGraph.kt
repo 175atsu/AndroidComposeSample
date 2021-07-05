@@ -1,6 +1,5 @@
 package com.example.androidcomposesample
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -29,11 +28,10 @@ object MainDestinations {
   const val THEME_PAGE_ROUTE = "themePage"
   const val INSTAGRAM_PAGE_ROUTE = "instagramPage"
   const val TIKTOK_PAGE_ROUTE = "tiktokPage"
-
 }
 
 @Composable
-fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE, context: Context) {
+fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE) {
   val navController = rememberNavController()
   val actions = remember(navController) { MainActions(navController) }
 
@@ -77,7 +75,7 @@ fun NavGraph(startDestination: String = MainDestinations.PLAYGROUND_ROUTE, conte
       InstagramScreen()
     }
     composable(MainDestinations.TIKTOK_PAGE_ROUTE) {
-      TikTokScreen(context)
+      TikTokScreen()
     }
   }
 }

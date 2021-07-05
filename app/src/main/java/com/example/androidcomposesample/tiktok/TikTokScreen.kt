@@ -1,25 +1,37 @@
 package com.example.androidcomposesample.tiktok
 
-import android.content.Context
 import android.net.Uri
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import coil.transform.CircleCropTransformation
 import com.example.androidcomposesample.R
@@ -38,7 +50,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TikTokScreen(context: Context) {
+fun TikTokScreen() {
   val pagerState = rememberPagerState(pageCount = 3)
   val postInfo = postList
   VerticalPager(
@@ -48,16 +60,21 @@ fun TikTokScreen(context: Context) {
     verticalAlignment = Alignment.Bottom
   ) { page ->
     Box(
-      modifier = Modifier.fillMaxSize()
+      modifier = Modifier
+        .fillMaxSize()
+        .clip(
+          RoundedCornerShape(4.dp)
+        )
     ) {
-      VideoComponent(context, postInfo[page].movieUrl)
-//      PostIcons(postInfo[page])
+      VideoComponent(postInfo[page].movieUrl)
+      VideoOverLayUI(postInfo[page])
     }
   }
 }
 
 @Composable
-fun VideoComponent(context: Context, uri: String) {
+fun VideoComponent(uri: String) {
+  val context = LocalContext.current
   val tiktokPlayer = remember {
     SimpleExoPlayer.Builder(context)
       .build()
@@ -65,7 +82,7 @@ fun VideoComponent(context: Context, uri: String) {
         val mediaSource = ProgressiveMediaSource.Factory(
           DefaultDataSourceFactory(context, "exoplayer-sample-app")
         )
-          .createMediaSource(MediaItem.fromUri(Uri.parse("asset:///${uri}")))
+          .createMediaSource(MediaItem.fromUri(Uri.parse("asset:///$uri")))
         playWhenReady = true
         setMediaSource(mediaSource)
         prepare()
@@ -86,14 +103,52 @@ fun VideoComponent(context: Context, uri: String) {
 }
 
 @Composable
+fun VideoOverLayUI(
+  post: TikTokPost
+) {
+  Row(
+    modifier = Modifier
+      .fillMaxSize()
+      .padding(8.dp),
+    verticalAlignment = Alignment.Bottom
+  ) {
+    VideoInfoSection(post, modifier = Modifier.weight(1f))
+    PostIcons(post)
+  }
+}
+
+@Composable
+fun VideoInfoSection(
+  post: TikTokPost,
+  modifier: Modifier = Modifier
+) {
+  Column(
+    modifier = modifier
+  ) {
+    Text(
+      text = "@${post.user.name}",
+      color = Color.White,
+      fontSize = 14.sp
+    )
+    Text(
+      text = post.content,
+      color = Color.White,
+      fontSize = 14.sp
+    )
+    Text(
+      text = post.content,
+      color = Color.White,
+      fontSize = 14.sp
+    )
+  }
+}
+
+@Composable
 fun PostIcons(
   post: TikTokPost
 ) {
   Column(
-    modifier = Modifier
-      .background(Color.Red),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Top
+    horizontalAlignment = Alignment.CenterHorizontally
   ) {
     Image(
       painter = rememberCoilPainter(
@@ -104,29 +159,41 @@ fun PostIcons(
       ),
       contentDescription = null,
       modifier = Modifier
-        .padding(horizontal = 16.dp)
-        .width(32.dp)
+        .width(44.dp)
     )
+    Spacer(modifier = Modifier.height(24.dp))
+    TikTokIconComponent(
+      R.drawable.ic_favorite_white_24dp,
+      post.like.toString()
+    )
+    Spacer(modifier = Modifier.height(24.dp))
+    TikTokIconComponent(
+      R.drawable.ic_chat_bubble_white_24dp,
+      post.comment.toString()
+    )
+    Spacer(modifier = Modifier.height(24.dp))
+    TikTokIconComponent(
+      R.drawable.ic_reply_white_24dp,
+      post.share.toString()
+    )
+    Spacer(modifier = Modifier.height(32.dp))
+    val rotation = remember { Animatable(0f) }
+    LaunchedEffect(Unit) {
+      rotation.animateTo(
+        targetValue = 360f,
+        animationSpec = repeatable(
+          iterations = 10000,
+          animation = tween(durationMillis = 3500, easing = LinearEasing),
+        ),
+      )
+    }
     Icon(
-      painter = painterResource(R.drawable.ic_favorite_border_black_26dp),
+      painter = painterResource(R.drawable.ic_reply_white_24dp),
       contentDescription = null,
-    )
-    Text(
-      text = post.like.toString()
-    )
-    Icon(
-      painter = painterResource(R.drawable.ic_chat_bubble_outline_black_26dp),
-      contentDescription = null,
-    )
-    Text(
-      text = post.comment.toString()
-    )
-    Icon(
-      painter = painterResource(R.drawable.ic_near_me_black_26dp),
-      contentDescription = null,
-    )
-    Text(
-      text = post.share.toString()
+      modifier = Modifier
+        .size(44.dp)
+        .rotate(rotation.value),
+      tint = Color.White
     )
   }
 }
