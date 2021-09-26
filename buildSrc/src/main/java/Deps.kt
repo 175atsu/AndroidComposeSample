@@ -2,6 +2,7 @@ object Deps {
   const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha08"
   const val material = "com.google.android.material:material:${Versions.material}"
   const val ktlint = "com.pinterest:ktlint:${Versions.ktlint}"
+  const val exoplayer = "com.google.android.exoplayer:exoplayer:${Versions.exoplayer}"
 
   object Accompanist {
     const val coil = "com.google.accompanist:accompanist-coil:${Versions.Accompanist.coil}"
