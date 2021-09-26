@@ -1,6 +1,5 @@
 package com.example.androidcomposesample.tiktok
 
-import android.net.Uri
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -21,7 +20,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -33,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import coil.transform.CircleCropTransformation
 import com.example.androidcomposesample.R
@@ -44,6 +41,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.VerticalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
@@ -53,7 +51,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun TikTokScreen() {
-  val pagerState = rememberPagerState(pageCount = 3)
+  val pagerState = rememberPagerState(pageCount = postList.size)
   val postInfo = postList
   VerticalPager(
     state = pagerState,
@@ -84,8 +82,9 @@ fun VideoComponent(uri: String) {
         val mediaSource = ProgressiveMediaSource.Factory(
           DefaultDataSourceFactory(context, "exoplayer-sample-app")
         )
-          .createMediaSource(MediaItem.fromUri(Uri.parse("asset:///$uri")))
+          .createMediaSource(MediaItem.fromUri("asset:///$uri"))
         playWhenReady = true
+        repeatMode = Player.REPEAT_MODE_ONE
         setMediaSource(mediaSource)
         prepare()
       }
@@ -94,9 +93,10 @@ fun VideoComponent(uri: String) {
   AndroidView(
     {
       PlayerView(it).apply {
+        setBackgroundColor(resources.getColor(R.color.tiktok_background))
         useController = false
         player = tiktokPlayer
-        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
       }
     },
     modifier = Modifier
@@ -114,7 +114,12 @@ fun VideoOverLayUI(
       .padding(8.dp),
     verticalAlignment = Alignment.Bottom
   ) {
-    VideoInfoSection(post, modifier = Modifier.weight(1f))
+    VideoInfoSection(
+      post = post,
+      modifier = Modifier
+        .weight(1f)
+        .padding(end = 40.dp)
+    )
     PostIcons(post)
   }
 }
@@ -138,23 +143,27 @@ fun VideoInfoSection(
   Column(
     modifier = modifier
   ) {
-    Text(
-      text = "@${post.user.name}",
-      color = Color.White,
-      fontSize = 14.sp
+    TikTokInfoTextComponent(
+      label = "@${post.user.name}"
     )
-    Text(
-      text = post.content,
-      color = Color.White,
-      fontSize = 14.sp
+    Spacer(Modifier.height(8.dp))
+    TikTokInfoTextComponent(
+      label = post.content,
     )
-    Text(
-      text = post.musicTitle,
-      color = Color.White,
-      fontSize = 14.sp,
-      modifier = Modifier
-        .horizontalScroll(state = state, enabled = false)
-    )
+    Spacer(Modifier.height(8.dp))
+    Row {
+      Icon(
+        painter = painterResource(R.drawable.ic_music_note_white_24dp),
+        contentDescription = null,
+        modifier = Modifier.size(24.dp),
+        tint = Color.White
+      )
+      TikTokInfoTextComponent(
+        label = post.musicTitle,
+        modifier = Modifier
+          .horizontalScroll(state = state, enabled = false)
+      )
+    }
   }
 }
 
@@ -200,14 +209,18 @@ fun PostIcons(
       R.drawable.ic_reply_white_24dp,
       post.share.toString()
     )
-    Spacer(modifier = Modifier.height(32.dp))
-    Icon(
-      painter = painterResource(R.drawable.ic_reply_white_24dp),
+    Spacer(modifier = Modifier.height(64.dp))
+    Image(
+      painter = rememberCoilPainter(
+        request = post.musicThumbnail,
+        requestBuilder = {
+          transformations(CircleCropTransformation())
+        }
+      ),
       contentDescription = null,
       modifier = Modifier
-        .size(44.dp)
-        .rotate(rotation.value),
-      tint = Color.White
+        .width(44.dp)
+        .rotate(rotation.value)
     )
   }
 }

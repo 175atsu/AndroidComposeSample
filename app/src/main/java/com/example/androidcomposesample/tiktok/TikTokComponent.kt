@@ -23,7 +23,7 @@ fun TikTokIconComponent(
     Icon(
       painter = painterResource(iconResource),
       contentDescription = null,
-      modifier = Modifier.size(44.dp),
+      modifier = Modifier.size(40.dp),
       tint = Color.White
     )
     Text(
@@ -32,4 +32,17 @@ fun TikTokIconComponent(
       fontSize = 12.sp
     )
   }
+}
+
+@Composable
+fun TikTokInfoTextComponent(
+  label: String,
+  modifier: Modifier = Modifier
+) {
+  Text(
+    text = label,
+    color = Color.White,
+    fontSize = 14.sp,
+    modifier = modifier
+  )
 }
